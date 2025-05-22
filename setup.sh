@@ -35,14 +35,14 @@ server {
     listen 80;
     listen [::]:80;
     root /opt/Webpage-VM-nginx/dist;
-    index index.html;
+    index index.html index.htm;
     location / {
         try_files $uri $uri/ /index.html;
     }
 }
 EOF
 
-ln -sf /etc/nginx/sites-available/Webpage-VM-nginx /etc/nginx/sites-enabled/Webpage-VM-nginx
+ln -s /etc/nginx/sites-available/Webpage-VM-nginx /etc/nginx/sites-enabled
 
 # Test and restart nginx
 nginx -t
