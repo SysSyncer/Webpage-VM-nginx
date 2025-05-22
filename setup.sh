@@ -12,7 +12,7 @@ fi
 apt update && apt upgrade -y
 
 # Install required packages
-apt install -y git nginx nodejs npm
+apt install -y nginx nodejs npm
 
 # Show node and npm versions
 node -v
