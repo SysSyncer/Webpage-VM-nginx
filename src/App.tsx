@@ -8,9 +8,9 @@ function App() {
       <div>
         <h1>
           Running webpage in&nbsp;
-          <img src={VM} alt="Azure" width={50} />
-          &nbsp;<span style={{ color: "lightblue" }}>Azure</span> using&nbsp;
           <img src={Azure} alt="VM" width={50} />
+          &nbsp;<span style={{ color: "lightblue" }}>Azure</span> using&nbsp;
+          <img src={VM} alt="Azure" width={50} />
           &nbsp;<span style={{ color: "orange" }}>Virtual Machine</span>
         </h1>
       </div>
