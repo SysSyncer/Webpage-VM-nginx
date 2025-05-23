@@ -27,25 +27,3 @@ cd /opt/Webpage-VM-nginx
 # Install dependencies and build
 npm install
 npm run build
-
-# Configure nginx
-rm -f /etc/nginx/sites-enabled/default
-cat >/etc/nginx/sites-available/Webpage-VM-nginx <<EOF
-server {
-    listen 80;
-    listen [::]:80;
-    root /opt/Webpage-VM-nginx/dist;
-    index index.html index.htm;
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-}
-EOF
-
-ln -s /etc/nginx/sites-available/Webpage-VM-nginx /etc/nginx/sites-enabled
-
-# Test and restart nginx
-nginx -t
-systemctl restart nginx
-systemctl enable nginx
-systemctl status nginx --no-pager

@@ -1,0 +1,6 @@
+sudo apt update && sudo apt upgrade;
+sudo apt install git;
+git clone https://github.com/SysSyncer/Webpage-VM-nginx.git;
+cd Webpage-VM-nginx
+sudo chmod +x ./setup.sh
+sudo ./setup.sh
