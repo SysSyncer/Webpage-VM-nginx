@@ -1,0 +1,35 @@
+# azure-pipelines.yml
+
+trigger:
+- main # Trigger the pipeline on pushes to the main branch
+
+pool:
+  vmImage: 'ubuntu-latest' # Use a Microsoft-hosted Linux agent
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '18.x' # Specify Node.js version
+  displayName: 'Install Node.js 18.x'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+  workingDirectory: '.' # Assuming package.json is at the root of the repo
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist' # Path to your build output (dist folder)
+    includeRootFolder: false # Don't include the 'dist' folder itself in the zip, just its contents
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+  displayName: 'Archive dist folder'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    ArtifactName: 'drop' # Name of the artifact
+    publishLocation: 'Container'
+  displayName: 'Publish Artifact: drop'
